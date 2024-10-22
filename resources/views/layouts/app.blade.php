@@ -32,5 +32,7 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+        <script src="https://kit.fontawesome.com/147ca5197e.js" crossorigin="anonymous"></script>
     </body>
 </html>
