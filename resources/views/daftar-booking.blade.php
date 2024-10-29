@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Booking a Rooms
+            Selamat memilih
         </h2>
     </x-slot>
     <form class="max-w-md mx-auto py-5">   
@@ -19,32 +19,63 @@
 
     
 <section class="grid grid-cols-3 gap-3"> 
-@foreach ($rooms as $room )
+@foreach ($rooms as $room)
+<div class="room-card {{ $room->is_booked ? 'booked' : 'available' }}">
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-5">
     <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $room->name }}</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $room->description }}</p>
     <p class="bg-yellow-200 p-2 mb-2 inline-block rounded-md text-xs">Kapasitas: {{ $room->capacity }}</p>
-    
+
+    <input type="hidden" id="room_id_{{ $room->id }}" value="{{ $room->id }}">
+    <input type="hidden" id="room_name_{{ $room->id }}" name="room_name" value="{{ $room->name }}">
     <div class="flex justify-between items-center mt-4">
-        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Booking
-            <i class="fa-solid fa-building-user px-2"></i>
-        </a>
-        
+        <button  class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-room-id="{{ $room->id }}" onclick="openModal({{ $room->id }})"> 
+            Booking<i class="fa-solid fa-building-user px-2"></i>
+        </button>
         <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-gray-400 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
            Selengkapnya
             <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
             </svg>
         </a>
+        @if ($room->is_booked)
+            <span class="badge bg-red-500 text-white p-1 rounded-md">Booked</span>
+        @else
+            <span class="badge bg-green-500 text-white p-1 rounded-md">available</span>
+        @endif
     </div>
 </div>
-
+</div>
+<div id="bookingModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+    <div class="bg-white rounded-lg p-6 w-1/2">
+        <h2 class="text-xl mb-4">Form Booking</h2>
+        <form id="bookingForm" action="{{ route('booking.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="room_id" id="room_id" value="{{ $room->id }}">
+            <input type="hidden" name="room_name" id="room_name" value="{{ $room->name }}">
+            <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
+            <div class="mb-4">
+                <label for="date" class="block text-sm">Nama Lengkap</label>
+                <input type="text" id="name" name="name" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="date" class="block text-sm">Tanggal:</label>
+                <input type="datetime-local" id="date" name="date" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="waktu" class="block text-sm">Waktu Mulai</label>
+                <input type="time" id="start_time" name="start_time" class="w-full p-2 border rounded">
+                <label for="waktu" class="block text-sm">Waktu Selesai</label>
+                <input type="time" id="end_time" name="end_time" class="w-full p-2 border rounded">
+            </div>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Submit</button>
+            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
 @endforeach
-
 </section>
-
 </x-app-layout>
 

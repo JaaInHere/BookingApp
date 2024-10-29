@@ -6,13 +6,13 @@
     </x-slot>
     
     <section class="py-12 pl-32 grid grid-cols-3 drop-shadow-md ">
-        <a href="/daftarRuang">
+        <a href="/daftar">
         <div class=" bg-white h-52 max-w-60 rounded-md">
             <span style="color: green">
             <i class="fa-solid fa-building fa-2xl px-4 py-6 mt-6 mx-6 bg-green-300 rounded-md"></i> 
             </span>
             <p class="text-xl ml-5 mt-5 font-medium text-gray-500">Ruangan Tersedia</p>
-            <p class="text-4xl text-center mt-5 font-medium text-gray-500">0</p>
+            <p class="text-4xl text-center mt-5 font-medium text-gray-500">{{ $availableRoomsCount }}</p>
         </div>
         </a>
 
@@ -21,8 +21,8 @@
             <span style="color: rgba(83,193,218,255)">
                 <i class="fa-solid fa-building-user fa-2xl px-4 py-6 mt-6 mx-6 bg-sky-200 rounded-md"></i> 
                 </span>
-                <p class="text-xl ml-5 mt-5 font-medium text-gray-500">Booking Ruangan</p>
-                <p class="text-4xl text-center mt-5 font-medium text-gray-500">0</p>
+                <p class="text-xl ml-5 mt-5 font-medium text-gray-500">Ruangan Terbooking</p>
+                <p class="text-4xl text-center mt-5 font-medium text-gray-500">{{ $totalBookedRooms }}</p>
         </div>
         </a>
 
@@ -32,7 +32,7 @@
                 <i class="fa-solid fa-building-circle-check fa-2xl px-4 py-6 mt-6 mx-6 bg-yellow-300 rounded-md"></i> 
                 </span>
                 <p class="text-xl ml-5 mt-5 font-medium text-gray-500">Booking Selesai Dibuat</p>
-                <p class="text-4xl text-center mt-5 font-medium text-gray-500">0</p>
+                <p class="text-4xl text-center mt-5 font-medium text-gray-500">{{ $userBookedRooms }}</p>
         </div>
         </a>
     </section>

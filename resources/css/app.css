@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
  
+
+.list-counter > li::before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    font-weight: bold;
+    color: gray;
+    padding-right: 0.5rem;
+}
+
+.list-counter {
+    counter-reset: item;
+}
