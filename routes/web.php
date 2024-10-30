@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminBookingController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminRoomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
@@ -36,6 +39,17 @@ Route::get('/daftar', [RoomController::class, 'ShowRooms'])->name('booking');
 Route::post('/dibooking', [BookingController::class, 'store'])->middleware('auth')->name('booking.store');
 
 Route::get('/dibooking', [BookingController::class, 'getBooking'])->name('dibooking');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'showAdminDashboard'])->name('admin.dashboard');
+    Route::get('admin/dashboard', [AdminDashboardController::class, 'showData'])->name('admin.dashboard');
+    Route::get('admin/booking', [AdminRoomController::class, 'ShowAdminBooking'])->name('admin.booking');
+    Route::get('/admin/booking', [AdminRoomController::class, 'ShowRooms'])->name('admin.booking');
+    Route::post('admin/dibooking', [AdminBookingController::class, 'store'])->middleware('auth')->name('booking.store');
+    Route::get('admin/dibooking', [AdminBookingController::class, 'getBooking'])->name('admin.dibooking');
+});
+
+
 
 
 require __DIR__.'/auth.php';
