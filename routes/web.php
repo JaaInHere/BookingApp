@@ -8,6 +8,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -47,6 +48,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/booking', [AdminRoomController::class, 'ShowRooms'])->name('admin.booking');
     Route::post('admin/dibooking', [AdminBookingController::class, 'store'])->middleware('auth')->name('booking.store');
     Route::get('admin/dibooking', [AdminBookingController::class, 'getBooking'])->name('admin.dibooking');
+    Route::get('admin/adduser', function(){
+        return view('admin.adduser');
+    })->name('admin.adduser');
+    Route::post('admin/adduser', [UserController::class, 'store'])->name('admin.adduser');
+    Route::get('admin/addrooms', function(){
+        return view('admin.addrooms');
+    })->name('admin.addrooms');
 });
 
 

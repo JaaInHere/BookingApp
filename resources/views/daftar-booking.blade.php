@@ -18,7 +18,7 @@
     </form>
 
     
-<section class="grid grid-cols-3 gap-3"> 
+<section class="grid grid-cols-3 gap-3 py-5"> 
 @foreach ($rooms as $room)
 <div class="room-card {{ $room->is_booked ? 'booked' : 'available' }}">
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-5">

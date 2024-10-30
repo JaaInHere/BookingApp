@@ -47,10 +47,23 @@
                             </div>
             
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <x-nav-link :href="route('dibooking')" :active="request()->routeIs('dibooking')">
+                                <x-nav-link :href="route('admin.dibooking')" :active="request()->routeIs('admin.dibooking')">
                                     {{ __('Booking Selesai Dibuat') }}
                                 </x-nav-link>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('admin.adduser')" :active="request()->routeIs('admin.adduser')">
+                                    {{ __('Tambah User') }}
+                                </x-nav-link>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('admin.addrooms')" :active="request()->routeIs('admin.rooms')">
+                                    {{ __('Tambah Ruangan') }}
+                                </x-nav-link>
+                            </div>
+
                         </div>
             
                         <!-- Settings Dropdown -->
@@ -69,10 +82,6 @@
                                 </x-slot>
             
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('profile.edit')">
-                                        {{ __('Profile') }}
-                                    </x-dropdown-link>
-            
                                     <!-- Authentication -->
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

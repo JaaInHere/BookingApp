@@ -56,8 +56,8 @@
                                 <x-nav-link :href="route('admin.adduser')" :active="request()->routeIs('admin.adduser')">
                                     {{ __('Tambah User') }}
                                 </x-nav-link>
-                            </div>          
-                            
+                            </div>
+
                             
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <x-nav-link :href="route('admin.addrooms')" :active="request()->routeIs('admin.rooms')">
@@ -128,7 +128,6 @@
                             <x-responsive-nav-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-responsive-nav-link>
-            
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -147,44 +146,63 @@
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <p class="text-2xl font-bold text-gray-700">Booking Selesai Dibuat</p>
+                    <p class="text-2xl font-bold text-gray-700">Add User</p>
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
-                <section class="px-8 py-6">
-                    <table class="min-w-full text-sm text-gray-900 bg-white border border-gray-600 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Nama</th>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Ruangan</th>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Tanggal</th>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Waktu</th>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($bookings as $booking)
-                            <tr>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->name }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->room_name }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->date }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->start_time }} - {{ $booking->end_time }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">
-                                    <button class="bg-red-700 p-1 rounded-md text-white">Hapus</button>
-                                    <button class="bg-blue-700 p-1 rounded-md text-white">Edit</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>    
-                </section>
-            </main>
+            <main class="py-10 px-28"> 
+            <section class="bg-gray-100 shadow-2xl rounded-md">
 
+                @if ($errors->any())
+                <div class="bg-red-500 text-white p-3 rounded mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            
+                @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+                @endif
+            
+            <form class="max-w-md mx-auto py-10" action="{{ route('admin.adduser') }}" method="POST">
+                @csrf
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="Text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+                </div>
+                <div class="class="relative z-0 w-full mb-5 group"">
+                <label for="role" class="sr-only">Underline select</label>
+                <select id="role" name="role" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected>Pilih Role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                </div>
+                <div class="relative z-0 w-full mb-5 group mt-3">
+                    <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+                </div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </form>
+            </section>
+            </main>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <<script src="{{ asset('/js/admin.js') }}"></script>
+        <script src="{{ asset('/js/custom.js') }}"></script>
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/147ca5197e.js" crossorigin="anonymous"></script>
         

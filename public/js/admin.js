@@ -47,7 +47,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         },
         success: function(response) {
             alert(response.message);
-            window.location.href = 'admin/dibooking';
+            window.location.href = 'dibooking';
         },
         error: function(xhr) {
             console.error(xhr.responseText);

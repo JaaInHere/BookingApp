@@ -51,6 +51,20 @@
                                     {{ __('Booking Selesai Dibuat') }}
                                 </x-nav-link>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('admin.adduser')" :active="request()->routeIs('admin.adduser')">
+                                    {{ __('Tambah User') }}
+                                </x-nav-link>
+                            </div>
+
+                            
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('admin.addrooms')" :active="request()->routeIs('admin.rooms')">
+                                    {{ __('Tambah Ruangan') }}
+                                </x-nav-link>
+                            </div>
+
                         </div>
             
                         <!-- Settings Dropdown -->
@@ -69,10 +83,6 @@
                                 </x-slot>
             
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('profile.edit')">
-                                        {{ __('Profile') }}
-                                    </x-dropdown-link>
-            
                                     <!-- Authentication -->
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -115,10 +125,6 @@
                         </div>
             
                         <div class="mt-3 space-y-1">
-                            <x-responsive-nav-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-responsive-nav-link>
-            
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -137,7 +143,7 @@
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <p class="text-2xl font-bold text-gray-700">Admin Dashboard</p>
+                    <p class="text-2xl font-bold text-gray-700">Booking Ruangan</p>
                 </div>
             </header>
 
@@ -157,7 +163,7 @@
                 </form>
             
                 
-            <section class="grid grid-cols-3 gap-3"> 
+            <section class="grid grid-cols-3 gap-3 py-5"> 
             @foreach ($rooms as $room)
             <div class="room-card {{ $room->is_booked ? 'booked' : 'available' }}">
             <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-5">
