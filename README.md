@@ -9,7 +9,7 @@
 
 ## About This Project
 
-Project ini dibuat untuk tujuan menyelesaikan tugas mengenai projek akhir dari Praktek Kerja Lapangan (PKL) di Telkom Univerity Fakultas Komunikasi dan Bisni dari SMKS Mahaputra Cerdas Utama Jurusan Pengembangan Perangkat Lunak dan Gim (PPLG).
+Project ini dibuat untuk tujuan menyelesaikan tugas mengenai projek akhir dari Praktek Kerja Lapangan (PKL) di Telkom Univerity Fakultas Komunikasi dan Bisnis dari SMKS Mahaputra Cerdas Utama Jurusan Pengembangan Perangkat Lunak dan Gim (PPLG).
 
 ## Learning Laravel
 
