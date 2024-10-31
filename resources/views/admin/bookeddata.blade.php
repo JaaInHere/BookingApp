@@ -35,7 +35,7 @@
             
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
+                                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                                     {{ __('Dashboard') }}
                                 </x-nav-link>
                             </div>
@@ -56,9 +56,8 @@
                                 <x-nav-link :href="route('admin.adduser')" :active="request()->routeIs('admin.adduser')">
                                     {{ __('Tambah User') }}
                                 </x-nav-link>
-                            </div>          
-                            
-                            
+                            </div>
+
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <x-nav-link :href="route('admin.addrooms')" :active="request()->routeIs('admin.rooms')">
                                     {{ __('Tambah Ruangan') }}
@@ -154,12 +153,12 @@
                         </div>
                     </div>
                 </div>
-            </nav>            
+            </nav>
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <p class="text-2xl font-bold text-gray-700">Booking Selesai Dibuat</p>
+                    <p class="text-2xl font-bold text-gray-700">Booked Data</p>
                 </div>
             </header>
 
@@ -169,20 +168,26 @@
                     <table class="min-w-full text-sm text-gray-900 bg-white border border-gray-600 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <thead>
                             <tr>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Nama</th>
-                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Ruangan</th>
+                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Id</th>
+                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Id User</th>
+                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Nama User</th>
+                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Id Ruangan</th>
+                                <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Nama Ruangan</th>
                                 <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Tanggal</th>
                                 <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Waktu</th>
                                 <th class="px-4 py-2 border border-gray-600 dark:border-gray-600">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($bookings as $booking)
+                            @foreach ($bookeds as $booked)
                             <tr>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->name }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->room_name }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->date }}</td>
-                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->start_time }} - {{ $booking->end_time }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->id }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->user_id }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->name }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->room_id }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->room_name }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->date }}</td>
+                                <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->start_time }} - {{ $booked->end_time }}</td>
                                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">
                                     <button class="bg-red-700 p-1 rounded-md text-white">Hapus</button>
                                     <button class="bg-blue-700 p-1 rounded-md text-white">Edit</button>
@@ -193,10 +198,9 @@
                     </table>    
                 </section>
             </main>
-
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <<script src="{{ asset('/js/admin.js') }}"></script>
+        <script src="{{ asset('/js/custom.js') }}"></script>
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/147ca5197e.js" crossorigin="anonymous"></script>
         

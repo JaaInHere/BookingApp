@@ -35,4 +35,10 @@ class UserController extends Controller
         return view('daftar-booking', compact('users'));
     }
 
+    public function showUsersData()
+    {
+        $users = User::all();
+        return view('admin.userdata', compact('users'));
+    }
+
 }

@@ -78,4 +78,10 @@ class AdminBookingController extends Controller
 
 }
 
+public function showBookedData()
+{
+    $bookeds = Booking::all();
+    return view('admin.bookeddata', compact('bookeds'));
+}
+
 }

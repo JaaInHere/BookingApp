@@ -55,6 +55,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/addrooms', function(){
         return view('admin.addrooms');
     })->name('admin.addrooms');
+    Route::post('admin/addrooms', [AdminRoomController::class, 'store'])->name('admin.addrooms');
+    Route::get('admin/userdata', function(){
+        return view('admin.userdata');
+    })->name('admin.userdata');
+    Route::get('admin/userdata', [UserController::class, 'showUsersData'])->name('admin.userdata');
+    Route::get('admin/bookeddata', function(){
+        return view('admin.bookeddata');
+    })->name('admin.bookeddata');
+    Route::get('admin/bookeddata', [AdminBookingController::class, 'showBookedData'])->name('admin.bookeddata');
 });
 
 
