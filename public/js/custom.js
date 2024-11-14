@@ -62,3 +62,57 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     });
 });
 
+function BookingDone(id) {
+    if (confirm("Booking Telah Selesai?")) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/dibooking/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Booking Telah Selesai.");
+                location.reload(); // Refresh halaman setelah berhasil
+            } else {
+                alert(data.message || "Booking Gagal Diselesaikan!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Terjadi Kesalahan. Coba lagi nanti!");
+        });
+    }
+}
+
+function BookingDelete(id) {
+    if (confirm("Yakin Ingin Menghapus Booking?")) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/dibooking/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Booking Telah Dihapus.");
+                location.reload(); // Refresh halaman setelah berhasil
+            } else {
+                alert(data.message || "Booking Gagal Dihapus!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Terjadi Kesalahan. Coba lagi nanti!");
+        });
+    }
+
+}

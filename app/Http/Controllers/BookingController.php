@@ -74,7 +74,16 @@ class BookingController extends Controller
 ;
 }
 
-    
+    public function destroy($id)
+    {
+        $booking = Booking::find($id);
+        if ($booking) {
+            $booking->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Booking tidak ditemukan']);
+        }
+    }    
 
 }
 

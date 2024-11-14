@@ -165,6 +165,17 @@
             <!-- Page Content -->
             <main>
                 <section class="px-8 py-6">
+                    <div class="py-3">
+                    @if(session('success'))
+                        <div class="bg-green-500 text-white p-2">{{ session('success') }}</div>
+                    @endif
+                    @if(session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+                    </div>
+
                     <table class="min-w-full text-sm text-gray-900 bg-white border border-gray-600 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <thead>
                             <tr>
@@ -189,18 +200,23 @@
                                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->date }}</td>
                                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booked->start_time }} - {{ $booked->end_time }}</td>
                                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">
-                                    <button class="bg-red-700 p-1 rounded-md text-white">Hapus</button>
-                                    <button class="bg-blue-700 p-1 rounded-md text-white">Edit</button>
+                                    <button class="bg-red-700 p-1 rounded-md text-white hover:bg-red-400"
+                                    onclick="BookingDelete({{ $booked->id }})">Hapus</button>
+                                    <a href="{{ route('booked.edit', ['id' => $booked->id]) }}" class="bg-blue-700 p-1 rounded-md text-white hover:bg-blue-400">Edit</a>
+                                    <button class="bg-green-400 p-1 rounded-md text-white hover:bg-green-300"
+                                    onclick="BookingDone({{ $booked->id }})">
+                                    Selesai
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>    
+                    </table>                                                           
                 </section>
             </main>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="{{ asset('/js/custom.js') }}"></script>
+        <script src="{{ asset('/js/admin.js') }}"></script>
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/147ca5197e.js" crossorigin="anonymous"></script>
         

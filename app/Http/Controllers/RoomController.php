@@ -20,4 +20,19 @@ class RoomController extends Controller
 
         return view('daftar-booking', compact('rooms'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        if($query){
+            $rooms = Room::where('name', 'like', '%' . $query . '%')
+                            ->orWhere('description', 'like', '%' . $query . '%')
+                            ->get();
+        } else {
+            $rooms = Room::all();
+        }
+
+        return view('daftar-booking', compact('rooms', 'query'));
+    }
 }

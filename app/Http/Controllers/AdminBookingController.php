@@ -84,4 +84,45 @@ public function showBookedData()
     return view('admin.bookeddata', compact('bookeds'));
 }
 
+public function edit($id)
+{
+    $booked = Booking::find($id);
+
+    if (!$booked) {
+        return redirect()->route('admin.bookeddata')->with('error', 'Booking not found');
+    }
+
+    return view('admin.editdata', compact('booked')); // Pastikan ini
+}
+
+
+public function update(Request $request, $id)
+{
+    // Temukan data booking berdasarkan ID
+    $booked = Booking::find($id);
+    
+    // Periksa apakah data booking ditemukan
+    if ($booked) {
+        // Update data booking
+        $booked->update($request->only(['name', 'date', 'start_time', 'end_time']));
+        
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('admin.bookeddata')->with('success', 'Data Booking Berhasil Diperbarui');
+    }
+
+    // Redirect dengan pesan error jika data tidak ditemukan
+    return redirect()->route('admin.bookeddata')->with('error', 'Data Tidak Ditemukan');
+}
+
+public function destroy($id)
+{
+    $booking = Booking::find($id);
+    if ($booking) {
+        $booking->delete();
+        return response()->json(['success' => true]);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Booking tidak ditemukan']);
+    }
+}  
+
 }

@@ -185,8 +185,7 @@
                                     <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $user->email }}</td>
                                     <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $user->role }}</td>
                                     <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">
-                                        <button class="bg-red-700 p-1 rounded-md text-white">Hapus</button>
-                                        <button class="bg-blue-700 p-1 rounded-md text-white">Edit</button>
+                                        <button class="bg-red-700 p-1 rounded-md text-white hover:bg-red-400" onclick="userDelete({{ $user->id }})">Hapus</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -196,7 +195,7 @@
             </main>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="{{ asset('/js/custom.js') }}"></script>
+        <script src="{{ asset('/js/admin.js') }}"></script>
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/147ca5197e.js" crossorigin="anonymous"></script>
         

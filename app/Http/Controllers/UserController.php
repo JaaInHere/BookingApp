@@ -41,4 +41,15 @@ class UserController extends Controller
         return view('admin.userdata', compact('users'));
     }
 
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if($user) {
+            $user->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Booking tidak ditemukan']);
+        }
+    }
+
 }

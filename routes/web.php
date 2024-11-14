@@ -12,7 +12,7 @@ use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('/dashboard', function () {
@@ -27,27 +27,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/daftar',function () {
-    return view('daftar-booking');
-})->name('booking');
+
+Route::get('/daftar/search', [RoomController::class, 'search'])->name('booking.search');
+
+Route::get('/daftar', [RoomController::class, 'ShowRooms'])->name('booking');
 
 Route::get('/diBooking', function(){
     return view('dibooking');
 })->name('dibooking');
 
-Route::get('/daftar', [RoomController::class, 'ShowRooms'])->name('booking');
-
 Route::post('/dibooking', [BookingController::class, 'store'])->middleware('auth')->name('booking.store');
 
 Route::get('/dibooking', [BookingController::class, 'getBooking'])->name('dibooking');
+Route::delete('/dibooking/delete/{id}', [BookingController::class, 'destroy'])->name('booked.delete');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'showAdminDashboard'])->name('admin.dashboard');
     Route::get('admin/dashboard', [AdminDashboardController::class, 'showData'])->name('admin.dashboard');
     Route::get('admin/booking', [AdminRoomController::class, 'ShowAdminBooking'])->name('admin.booking');
+    Route::get('admin/booking/search', [AdminRoomController::class, 'search'])->name('admin.search');
     Route::get('/admin/booking', [AdminRoomController::class, 'ShowRooms'])->name('admin.booking');
     Route::post('admin/dibooking', [AdminBookingController::class, 'store'])->middleware('auth')->name('booking.store');
     Route::get('admin/dibooking', [AdminBookingController::class, 'getBooking'])->name('admin.dibooking');
+    Route::delete('/admin/dibooking/{id}', [AdminBookingController::class, 'destroy'])->name('booked.delete');
     Route::get('admin/adduser', function(){
         return view('admin.adduser');
     })->name('admin.adduser');
@@ -60,10 +62,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.userdata');
     })->name('admin.userdata');
     Route::get('admin/userdata', [UserController::class, 'showUsersData'])->name('admin.userdata');
+    Route::delete('/admin/userdata/{id}', [UserController::class, 'destroy'])->name('user.delete');
     Route::get('admin/bookeddata', function(){
         return view('admin.bookeddata');
     })->name('admin.bookeddata');
     Route::get('admin/bookeddata', [AdminBookingController::class, 'showBookedData'])->name('admin.bookeddata');
+    Route::get('admin/editdata', function(){
+        return view('admin.editdata');
+    })->name('admin.editdata');
+    Route::get('admin/bookeddata/edit/{id}', [AdminBookingController::class, 'edit'])->name('booked.edit');
+    Route::post('admin/bookeddata/update/{id}', [AdminBookingController::class, 'update'])->name('booked.update');
 });
 
 

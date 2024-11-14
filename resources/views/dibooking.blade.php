@@ -24,12 +24,16 @@
                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->date }}</td>
                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">{{ $booking->start_time }} - {{ $booking->end_time }}</td>
                 <td class="px-4 py-2 border border-gray-600 dark:border-gray-600">
-                    <button class="bg-red-700 p-1 rounded-md text-white">Hapus</button>
-                    <button class="bg-blue-700 p-1 rounded-md text-white">Edit</button>
+                    <button class="bg-red-700 p-1 rounded-md text-white hover:bg-red-500"
+                    onclick="BookingDelete({{ $booking->id }})">Hapus</button>
+                    <button class="bg-green-400 p-1 rounded-md text-white hover:bg-green-200"
+                        onclick="BookingDone({{ $booking->id }})">
+                        Selesai
+                    </button>
                 </td>
             </tr>
             @endforeach
         </tbody>
-    </table>    
+    </table>      
 </section>
 </x-app-layout>

@@ -1,7 +1,7 @@
 let room_id; // Deklarasi variabel global untuk room_id
 let user_id;
 let room_name;
-
+console.log('TEST')
 function openModal(roomId, userId, roomName) {
     room_id = roomId;
     user_id = userId;
@@ -62,3 +62,83 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     });
 });
 
+function BookingDone(id) {
+    if (confirm("Booking Telah Selesai?")) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/admin/dibooking/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Booking Telah Selesai.");
+                location.reload(); // Refresh halaman setelah berhasil
+            } else {
+                alert(data.message || "Booking Gagal Diselesaikan!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Terjadi Kesalahan. Coba lagi nanti!");
+        });
+    }
+}
+
+function BookingDelete(id) {
+    if (confirm("Hapus Booking?")) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/admin/dibooking/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Booking Telah Dihapus.");
+                location.reload(); // Refresh halaman setelah berhasil
+            } else {
+                alert(data.message || "Booking Gagal DiHapus!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Terjadi Kesalahan. Coba lagi nanti!");
+        });
+    }
+}
+
+function userDelete(id) {
+    if (confirm("Hapus User?")) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(`/admin/userdata/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("User Telah Dihapus.");
+                location.reload(); // Refresh halaman setelah berhasil
+            } else {
+                alert(data.message || "User Gagal DiHapus!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Terjadi Kesalahan. Coba lagi nanti!");
+        });
+    }
+}
