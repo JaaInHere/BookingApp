@@ -30,9 +30,9 @@
             <p class="bg-yellow-200 p-2 mb-2 inline-block rounded-md text-xs">Kapasitas: {{ $room->capacity }}</p>
 
             <div class="flex justify-between items-center mt-4">
-                <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-room-id="{{ $room->id }}" onclick="openModal({{ $room->id }})">
+                <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="openModal({{ $room->id }}, {{ auth()->user()->id }}, '{{ $room->name }}')">
                     Booking<i class="fa-solid fa-building-user px-2"></i>
-                </button>
+                </button>                
                 <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-gray-400 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     Selengkapnya
                     <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -47,7 +47,10 @@
             </div>
         </div>
     </div>
-    <div id="bookingModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+@empty
+<p class="text-gray-600 col-span-3 ml-5">Tidak ada ruangan yang ditemukan.</p>
+@endforelse
+<div id="bookingModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
     <div class="bg-white rounded-lg p-6 w-1/2">
         <h2 class="text-xl mb-4">Form Booking</h2>
         <form id="bookingForm" action="{{ route('booking.store') }}" method="POST">
@@ -74,9 +77,6 @@
         </form>
     </div>
     </div>
-@empty
-<p class="text-gray-600 col-span-3 ml-5">Tidak ada ruangan yang ditemukan.</p>
-@endforelse
 </section>
 </x-app-layout>
 

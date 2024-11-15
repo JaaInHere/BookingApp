@@ -6,7 +6,10 @@ function openModal(roomId, userId, roomName) {
     room_id = roomId;
     user_id = userId;
     room_name = roomName;
-    room_name = document.getElementById(`room_name_${roomId}`).value;
+
+    document.getElementById('room_id').value = roomId
+    document.getElementById('room_name').value = roomName
+
     document.getElementById('bookingModal').classList.remove('hidden');
 }
 
