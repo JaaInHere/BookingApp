@@ -32,6 +32,8 @@ Route::get('/daftar/search', [RoomController::class, 'search'])->name('booking.s
 
 Route::get('/daftar', [RoomController::class, 'ShowRooms'])->name('booking');
 
+Route::get('daftar/{id}', [RoomController::class, 'singleRoom'])->name('singleRoom');
+
 Route::get('/diBooking', function(){
     return view('dibooking');
 })->name('dibooking');
@@ -45,6 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'showAdminDashboard'])->name('admin.dashboard');
     Route::get('admin/dashboard', [AdminDashboardController::class, 'showData'])->name('admin.dashboard');
     Route::get('admin/booking', [AdminRoomController::class, 'ShowAdminBooking'])->name('admin.booking');
+    Route::get('/admin/booking/{id}', [AdminRoomController::class, 'singleRoom'])->name('admin.singleRoom');
+
     Route::get('admin/booking/search', [AdminRoomController::class, 'search'])->name('admin.search');
     Route::get('/admin/booking', [AdminRoomController::class, 'ShowRooms'])->name('admin.booking');
     Route::post('admin/dibooking', [AdminBookingController::class, 'store'])->middleware('auth')->name('booking.store');

@@ -36,13 +36,19 @@ class AdminRoomController extends Controller
 
         $rooms = Room::all();
 
-
         foreach ($rooms as $room){
             
             $room->is_booked = Booking::where('room_id', $room->id)->exists();
         }
 
         return view('admin.booking', compact('rooms'));
+    }
+
+    public function singleRoom($id) {
+        $room = Room::findOrFail($id);
+
+        $isBooked = Booking::where('room_id', $room->id)->exists();
+        return view('admin.adminsingleroom', compact('room', 'isBooked'));
     }
 
     public function search(Request $request)

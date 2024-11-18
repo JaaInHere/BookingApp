@@ -21,6 +21,13 @@ class RoomController extends Controller
         return view('daftar-booking', compact('rooms'));
     }
 
+    public function singleRoom($id) {
+        $room = Room::findOrFail($id);
+
+        $isBooked = Booking::where('room_id', $room->id)->exists();
+        return view('singleRoom', compact('room', 'isBooked'));
+    }
+
     public function search(Request $request)
     {
         $query = $request->input('query');
