@@ -25,7 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/booking/search', [AdminRoomController::class, 'adminSearch']);
 });
+
 
 
 Route::get('/daftar/search', [RoomController::class, 'search'])->name('booking.search');
@@ -48,8 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'showData'])->name('admin.dashboard');
     Route::get('admin/booking', [AdminRoomController::class, 'ShowAdminBooking'])->name('admin.booking');
     Route::get('/admin/booking/{id}', [AdminRoomController::class, 'singleRoom'])->name('admin.singleRoom');
-
-    Route::get('admin/booking/search', [AdminRoomController::class, 'search'])->name('admin.search');
+    Route::get('/admin/booking/search', [AdminRoomController::class, 'adminSearch'])->name('admin.search');
     Route::get('/admin/booking', [AdminRoomController::class, 'ShowRooms'])->name('admin.booking');
     Route::post('admin/dibooking', [AdminBookingController::class, 'store'])->middleware('auth')->name('booking.store');
     Route::get('admin/dibooking', [AdminBookingController::class, 'getBooking'])->name('admin.dibooking');
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/bookeddata/edit/{id}', [AdminBookingController::class, 'edit'])->name('booked.edit');
     Route::post('admin/bookeddata/update/{id}', [AdminBookingController::class, 'update'])->name('booked.update');
 });
+
 
 
 

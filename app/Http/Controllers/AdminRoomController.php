@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdminRoomController extends Controller
 {
@@ -51,8 +52,10 @@ class AdminRoomController extends Controller
         return view('admin.adminsingleroom', compact('room', 'isBooked'));
     }
 
-    public function search(Request $request)
+    public function adminSearch(Request $request)
     {
+        Log::info('Search query:', ['query' => $request->input('query')]);
+
         $query = $request->input('query');
 
         if($query){

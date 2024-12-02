@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RoomController extends Controller
 {
@@ -30,6 +31,8 @@ class RoomController extends Controller
 
     public function search(Request $request)
     {
+        Log::info('Search query:', ['query' => $request->input('query')]);
+
         $query = $request->input('query');
 
         if($query){
